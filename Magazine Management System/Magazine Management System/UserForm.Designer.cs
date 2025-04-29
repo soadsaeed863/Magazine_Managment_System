@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.topPanel = new System.Windows.Forms.Panel();
-            this.containerPanel = new System.Windows.Forms.Panel();
             this.profilePicture = new System.Windows.Forms.PictureBox();
             this.homeIcon = new System.Windows.Forms.PictureBox();
+            this.containerPanel = new System.Windows.Forms.Panel();
+            this.innerTopPanel = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.homeIcon)).BeginInit();
@@ -39,6 +40,7 @@
             // 
             // topPanel
             // 
+            this.topPanel.Controls.Add(this.innerTopPanel);
             this.topPanel.Controls.Add(this.profilePicture);
             this.topPanel.Controls.Add(this.homeIcon);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -46,15 +48,6 @@
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(1232, 64);
             this.topPanel.TabIndex = 0;
-            // 
-            // containerPanel
-            // 
-            this.containerPanel.AutoScroll = true;
-            this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.containerPanel.Location = new System.Drawing.Point(0, 64);
-            this.containerPanel.Name = "containerPanel";
-            this.containerPanel.Size = new System.Drawing.Size(1232, 789);
-            this.containerPanel.TabIndex = 1;
             // 
             // profilePicture
             // 
@@ -75,6 +68,24 @@
             this.homeIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.homeIcon.TabIndex = 0;
             this.homeIcon.TabStop = false;
+            // 
+            // containerPanel
+            // 
+            this.containerPanel.AutoScroll = true;
+            this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.containerPanel.Location = new System.Drawing.Point(0, 64);
+            this.containerPanel.Name = "containerPanel";
+            this.containerPanel.Size = new System.Drawing.Size(1232, 789);
+            this.containerPanel.TabIndex = 1;
+            // 
+            // innerTopPanel
+            // 
+            this.innerTopPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.innerTopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.innerTopPanel.Location = new System.Drawing.Point(0, 63);
+            this.innerTopPanel.Name = "innerTopPanel";
+            this.innerTopPanel.Size = new System.Drawing.Size(1232, 1);
+            this.innerTopPanel.TabIndex = 0;
             // 
             // UserForm
             // 
@@ -98,5 +109,6 @@
         private System.Windows.Forms.Panel containerPanel;
         private System.Windows.Forms.PictureBox homeIcon;
         private System.Windows.Forms.PictureBox profilePicture;
+        private System.Windows.Forms.Panel innerTopPanel;
     }
 }
