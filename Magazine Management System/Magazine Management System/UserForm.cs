@@ -7,13 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
-using Magazine_Managment_System.UserControls;
+using Magazine_Management_System.UserControls;
 using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types   ;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-
-namespace Magazine_Managment_System
+namespace Magazine_Management_System
 {
     public partial class UserForm : Form
     {
@@ -22,12 +20,10 @@ namespace Magazine_Managment_System
         public UserForm()
         {
             InitializeComponent();
-            profilePicture.MouseClick += new MouseEventHandler(profilePicture_MouseClick);
+            profilePicture.Click += new EventHandler(profilePicture_Click);
             homeIcon.Click += new EventHandler(homeIcon_Click);
-
-
         }
-        private void profilePicture_MouseClick(object sender, MouseEventArgs e)
+        private void profilePicture_Click(object sender, EventArgs e)
         {
             UC_UserProfile profileControl = new UC_UserProfile();
 
@@ -35,6 +31,7 @@ namespace Magazine_Managment_System
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(profileControl);
         }
+
         private void homeIcon_Click(object sender, EventArgs e)
         {
             UC_Home homeControl = new UC_Home();
@@ -42,5 +39,6 @@ namespace Magazine_Managment_System
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(homeControl);
         }
+
     }
 }

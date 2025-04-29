@@ -7,18 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types;
 
-namespace Magazine_Management_System
+namespace Magazine_Management_System.UserControls
 {
-    public partial class Form1 : Form
+    public partial class UC_UserProfile : UserControl
     {
-        public Form1()
+        public UC_UserProfile()
         {
             InitializeComponent();
         }
-
-
     }
 }
