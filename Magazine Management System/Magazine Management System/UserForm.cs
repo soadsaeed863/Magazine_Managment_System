@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Magazine_Management_System.UserControls;
+using Magazine_Managment_System.UserControls;
 using Oracle.DataAccess.Client;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -34,7 +35,7 @@ namespace Magazine_Management_System
 
         private void homeIcon_Click(object sender, EventArgs e)
         {
-            UC_Home homeControl = new UC_Home();
+            UC_ArticleDetails homeControl = new UC_ArticleDetails();
             homeControl.Dock = DockStyle.Fill;
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(homeControl);
