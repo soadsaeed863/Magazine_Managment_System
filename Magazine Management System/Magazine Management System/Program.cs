@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//using System.Web.UI.WebControls;
+
+//using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
-namespace Magazine_Management_System
+namespace Magazine_Managment_System
 {
     internal static class Program
     {
@@ -16,7 +19,7 @@ namespace Magazine_Management_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserForm());
+            Application.Run(new Login());
         }
     }
 }
