@@ -35,7 +35,7 @@ namespace Magazine_Management_System
 
         private void homeIcon_Click(object sender, EventArgs e)
         {
-            UC_ArticleDetails homeControl = new UC_ArticleDetails();
+            UC_Section homeControl = new UC_Section();
             homeControl.Dock = DockStyle.Fill;
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(homeControl);

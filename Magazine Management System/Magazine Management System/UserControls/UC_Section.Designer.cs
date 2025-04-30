@@ -28,10 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.secNameLbl = new System.Windows.Forms.Label();
+            this.secDetailsLbl = new System.Windows.Forms.Label();
+            this.followbtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.SuspendLayout();
+            // 
+            // secNameLbl
+            // 
+            this.secNameLbl.AutoSize = true;
+            this.secNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secNameLbl.Location = new System.Drawing.Point(505, 45);
+            this.secNameLbl.Name = "secNameLbl";
+            this.secNameLbl.Size = new System.Drawing.Size(126, 38);
+            this.secNameLbl.TabIndex = 0;
+            this.secNameLbl.Text = "Fashon";
+            // 
+            // secDetailsLbl
+            // 
+            this.secDetailsLbl.AutoSize = true;
+            this.secDetailsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secDetailsLbl.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.secDetailsLbl.Location = new System.Drawing.Point(419, 94);
+            this.secDetailsLbl.Name = "secDetailsLbl";
+            this.secDetailsLbl.Size = new System.Drawing.Size(297, 32);
+            this.secDetailsLbl.TabIndex = 1;
+            this.secDetailsLbl.Text = "12 Follower . 5 articles";
+            // 
+            // followbtn
+            // 
+            this.followbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.followbtn.Location = new System.Drawing.Point(473, 142);
+            this.followbtn.Name = "followbtn";
+            this.followbtn.Size = new System.Drawing.Size(198, 41);
+            this.followbtn.TabIndex = 2;
+            this.followbtn.Text = "Follow";
+            this.followbtn.UseVisualStyleBackColor = true;
+            this.followbtn.Click += new System.EventHandler(this.followbtn_Click);
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(32, 186);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(302, 41);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Latest Articles";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(492, 727);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(198, 41);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "See More";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 227);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1232, 461);
+            this.flowLayoutPanel1.TabIndex = 9;
+            // 
+            // UC_Section
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.followbtn);
+            this.Controls.Add(this.secDetailsLbl);
+            this.Controls.Add(this.secNameLbl);
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "UC_Section";
+            this.Size = new System.Drawing.Size(1232, 789);
+            this.Load += new System.EventHandler(this.UC_Section_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label secNameLbl;
+        private System.Windows.Forms.Label secDetailsLbl;
+        private System.Windows.Forms.Button followbtn;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
