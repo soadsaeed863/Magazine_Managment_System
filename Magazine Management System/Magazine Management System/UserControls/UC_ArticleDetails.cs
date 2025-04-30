@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Magazine_Managment_System.UserControls
 {
     public partial class UC_ArticleDetails : UserControl
