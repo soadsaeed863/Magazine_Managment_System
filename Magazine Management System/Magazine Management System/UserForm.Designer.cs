@@ -31,15 +31,20 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.innerTopPanel = new System.Windows.Forms.Panel();
             this.containerPanel = new System.Windows.Forms.Panel();
+            this.logoutbtn = new System.Windows.Forms.PictureBox();
             this.profilePicture = new System.Windows.Forms.PictureBox();
             this.homeIcon = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.topPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoutbtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.homeIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // topPanel
             // 
+            this.topPanel.Controls.Add(this.textBox1);
+            this.topPanel.Controls.Add(this.logoutbtn);
             this.topPanel.Controls.Add(this.innerTopPanel);
             this.topPanel.Controls.Add(this.profilePicture);
             this.topPanel.Controls.Add(this.homeIcon);
@@ -67,6 +72,17 @@
             this.containerPanel.Size = new System.Drawing.Size(1232, 789);
             this.containerPanel.TabIndex = 1;
             // 
+            // logoutbtn
+            // 
+            this.logoutbtn.Image = global::Magazine_Management_System.Properties.Resources.logout;
+            this.logoutbtn.Location = new System.Drawing.Point(12, 9);
+            this.logoutbtn.Name = "logoutbtn";
+            this.logoutbtn.Size = new System.Drawing.Size(73, 46);
+            this.logoutbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoutbtn.TabIndex = 1;
+            this.logoutbtn.TabStop = false;
+            this.logoutbtn.Click += new System.EventHandler(this.logoutbtn_Click);
+            // 
             // profilePicture
             // 
             this.profilePicture.Image = global::Magazine_Management_System.Properties.Resources.profile_user;
@@ -87,6 +103,13 @@
             this.homeIcon.TabIndex = 0;
             this.homeIcon.TabStop = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(102, 33);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(710, 22);
+            this.textBox1.TabIndex = 2;
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -98,6 +121,8 @@
             this.Name = "UserForm";
             this.Text = "UserForm";
             this.topPanel.ResumeLayout(false);
+            this.topPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoutbtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.homeIcon)).EndInit();
             this.ResumeLayout(false);
@@ -111,5 +136,7 @@
         private System.Windows.Forms.PictureBox homeIcon;
         private System.Windows.Forms.PictureBox profilePicture;
         private System.Windows.Forms.Panel innerTopPanel;
+        private System.Windows.Forms.PictureBox logoutbtn;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

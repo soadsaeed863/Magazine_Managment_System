@@ -15,7 +15,7 @@ namespace Magazine_Management_System.ProfileControls
 {
     public partial class Notifications : UserControl
     {
-        string ordb = "Data Source = ORCL ; User Id = scott ; Password = esraa;";
+        string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection connNotifi;
         public Notifications()
         {

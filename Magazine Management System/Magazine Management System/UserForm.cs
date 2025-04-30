@@ -40,6 +40,17 @@ namespace Magazine_Management_System
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(homeControl);
         }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
 
+        private void logoutbtn_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            this.FindForm().Visible = false;
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
+        }
     }
 }

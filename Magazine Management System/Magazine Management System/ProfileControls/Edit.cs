@@ -14,7 +14,7 @@ namespace Magazine_Management_System.ProfileControls
 {
     public partial class Edit : UserControl
     {
-        string ordb = "Data Source = ORCL ; User Id = scott ; Password = esraa;";
+        string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection connEdit;
         public Edit()
         {

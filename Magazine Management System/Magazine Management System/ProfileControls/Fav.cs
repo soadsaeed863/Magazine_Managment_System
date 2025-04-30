@@ -13,7 +13,7 @@ namespace Magazine_Management_System.ProfileControls
 {
     public partial class Fav : UserControl
     {
-        string ordb = "Data Source = ORCL ; User Id = scott ; Password = esraa;";
+        string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection connFav;
         public Fav()
         {
@@ -90,9 +90,9 @@ namespace Magazine_Management_System.ProfileControls
 
         private void continer_Paint(object sender, PaintEventArgs e)
         {
-            continer.AutoScroll = true;
-            continer.VerticalScroll.Enabled = true;
-            continer.VerticalScroll.Visible = true;
+            //continer.AutoScroll = true;
+            //continer.VerticalScroll.Enabled = true;
+            //continer.VerticalScroll.Visible = true;
         }
     }
 }

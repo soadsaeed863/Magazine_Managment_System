@@ -34,19 +34,22 @@
             // continer
             // 
             this.continer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.continer.Location = new System.Drawing.Point(235, 0);
+            this.continer.Location = new System.Drawing.Point(73, 4);
+            this.continer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.continer.Name = "continer";
-            this.continer.Size = new System.Drawing.Size(805, 563);
+            this.continer.Size = new System.Drawing.Size(1050, 789);
             this.continer.TabIndex = 0;
             this.continer.Paint += new System.Windows.Forms.PaintEventHandler(this.continer_Paint);
             // 
             // Fav
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.continer);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Fav";
-            this.Size = new System.Drawing.Size(1232, 563);
+            this.Size = new System.Drawing.Size(1211, 789);
             this.Load += new System.EventHandler(this.Fav_Load);
             this.ResumeLayout(false);
 

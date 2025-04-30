@@ -18,7 +18,10 @@ namespace Magazine_Management_System
         {
             InitializeComponent();
         }
-
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
 
     }
 }

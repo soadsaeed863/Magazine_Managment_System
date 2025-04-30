@@ -15,7 +15,7 @@ namespace Magazine_Management_System.UserControls
 {
     public partial class UC_UserProfile : UserControl
     {
-        string ordb = "Data Source = ORCL ; User Id = scott ; Password = esraa;";
+        string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection conn;
         public UC_UserProfile()
         {

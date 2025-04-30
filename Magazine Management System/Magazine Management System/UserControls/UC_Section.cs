@@ -17,9 +17,11 @@ namespace Magazine_Management_System.UserControls
     {
         string ordb = "Data Source=orcl;User Id=scott;Password=tiger;";
         OracleConnection conn;
-        int userID =1;
+        int userID =2;
         int sectionId =1;
         string setionName="Fashon";
+        int followers = 0;
+        int articles = 0;
         //private DataSet ds;
         //int rows=0;
         //int columns=0;
@@ -27,80 +29,8 @@ namespace Magazine_Management_System.UserControls
         {
             InitializeComponent();
         }
-
-
-
-
-
-
-        //public void viewArticles()
-        //{
-        //    conn = new OracleConnection(ordb);
-        //    conn.Open();
-        //    OracleCommand cmd = new OracleCommand();
-        //    cmd.Connection = conn;
-        //    cmd.CommandText = "select id,photo,title,published_time from articles where section_id = 1";
-        //    //cmd.Parameters.Add("secId", sectionId);
-        //    cmd.CommandType = CommandType.Text;
-        //    OracleDataReader reader = cmd.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        MessageBox.Show($"Article ID: {reader[0]}, Title: {reader[2]}, Published Time: {reader[3]}");
-        //    comboBox1.Items.Add(reader[1].ToString());
-        //    comboBox2.Items.Add(reader[2].ToString());
-        //    comboBox3.Items.Add(reader[3].ToString());
-
-        //    }
-        //    conn.Close();
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public void viewArticles()
         {
-            //foreach (DataRow row in ds.Tables[0].Rows)
-            //{
-
-            //for (int i = 1; i <= 6; i++)
-            //{
-            //    ArticleCard articleCard = new ArticleCard();
-
-            //    //if (i % 3 == 0) 
-            //    //{
-            //    //    articleCard.Margin= new Padding( 30, 10, 0, 30);
-            //    //}
-
-            //    flowLayoutPanel1.Controls.Add(articleCard);
-            //}
-            //rows++;
-            //if (rows == 1) 
-            //{
-            //columns++;
-            //rows = 0;
-            //}
-
-            //}
             int comments = 0;
             int reacts = 0;
             conn = new OracleConnection(ordb);
@@ -158,8 +88,7 @@ namespace Magazine_Management_System.UserControls
                 this.sectionId = Convert.ToInt32(reader[0]);
             }
             secNameLbl.Text = setionName;
-            int followers = 0;
-            int articles = 0;
+
             cmd.CommandText = "select count (*) from followed_sections where section_id = :secId";
             cmd.Parameters.Clear();
             cmd.Parameters.Add("secId", sectionId);
@@ -167,7 +96,7 @@ namespace Magazine_Management_System.UserControls
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                followers = Convert.ToInt32(reader[0]);
+                this.followers = Convert.ToInt32(reader[0]);
             }
             cmd.CommandText = "select count (*) from articles where section_id = :secId";
             cmd.Parameters.Clear();
@@ -176,7 +105,7 @@ namespace Magazine_Management_System.UserControls
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                articles = Convert.ToInt32(reader[0]);
+                this.articles = Convert.ToInt32(reader[0]);
             }
             conn.Dispose();
 
@@ -213,11 +142,15 @@ namespace Magazine_Management_System.UserControls
             if (followbtn.Text == "UnFollow")
             {
                 cmd.CommandText = "delete from  followed_sections where user_id =:userid AND section_id = :secId";
+                this.followers--;
+                secDetailsLbl.Text = $"{this.followers} Followers . {this.articles} articles";
             }
             // insert
             else 
             {
                 cmd.CommandText = "insert into  followed_sections (user_id, section_id) values (:userid,:secId)";
+                this.followers++;
+                secDetailsLbl.Text = $"{this.followers} Followers . {this.articles} articles";
                 follow = true;
             }
             cmd.Parameters.Add("userid", userID);
