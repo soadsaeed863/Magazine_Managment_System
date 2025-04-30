@@ -76,6 +76,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ArticleCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ArticleCard.Designer.cs">
+      <DependentUpon>ArticleCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC_ArticleDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,11 +128,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\ArticleCard.resx">
+      <DependentUpon>ArticleCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_ArticleDetails.resx">
       <DependentUpon>UC_ArticleDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Home.resx">
       <DependentUpon>UC_Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Section.resx">
+      <DependentUpon>UC_Section.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_UserProfile.resx">
       <DependentUpon>UC_UserProfile.cs</DependentUpon>
@@ -153,6 +165,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\profile-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\article1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\article11.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\article2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
