@@ -14,12 +14,12 @@ using Oracle.DataAccess.Types;
 using System.Text.RegularExpressions;
 namespace Magazine_Managment_System
 {
-    public partial class Form1: Form
+    public partial class Register: Form
     {
         string ordb = "Data source=orcl;User Id=scott; Password = tiger;";
         OracleConnection conn;
         byte[] imageBytes;
-        public Form1()
+        public Register()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             

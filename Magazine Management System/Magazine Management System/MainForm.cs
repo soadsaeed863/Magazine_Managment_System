@@ -36,7 +36,7 @@ namespace Magazine_Management_System
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form1 register1 = new Form1();
+            Admin register1 = new Admin();
             register1.Show();
             this.Hide();
         }

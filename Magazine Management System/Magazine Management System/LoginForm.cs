@@ -31,7 +31,7 @@ namespace Magazine_Managment_System
         private void label13_Click(object sender, EventArgs e)
         {
             //loginToRegister
-            Form1 register = new Form1();
+            Register register = new Register();
             register.Show();
             this.Close();
         }
@@ -58,7 +58,7 @@ namespace Magazine_Managment_System
                     MessageBox.Show("Login Successful", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (dr["role_name"].ToString() == "Admin")
                     
-                        new AdminForm(Convert.ToInt32(dr["id"])).Show();
+                        new Admin().Show();
                     
                     else
                         new UserForm(Convert.ToInt32(dr["id"])).Show(); 
