@@ -90,6 +90,7 @@
             this.profilePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.profilePicture.TabIndex = 0;
             this.profilePicture.TabStop = false;
+            this.profilePicture.Click += new System.EventHandler(this.profilePicture_Click_1);
             // 
             // homeIcon
             // 
@@ -100,6 +101,7 @@
             this.homeIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.homeIcon.TabIndex = 0;
             this.homeIcon.TabStop = false;
+            this.homeIcon.Click += new System.EventHandler(this.homeIcon_Click_1);
             // 
             // containerPanel
             // 

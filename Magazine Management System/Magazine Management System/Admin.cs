@@ -107,7 +107,7 @@ namespace Magazine_Management_System
         }
 
 
-
+        //display articles 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             string conn = "Data source= orcl ; user id= scott ;password = tiger";
@@ -343,14 +343,13 @@ namespace Magazine_Management_System
             comboBox2.DisplayMember = "name";
         }
 
-        //display articles for comments on radio button select
-        // display articles for comments on radio button select
+         // display articles for comments on radio button select
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton3.Checked)
             {
                 string connStr = "Data Source=orcl;User Id=scott;Password=tiger;";
-                string query = "SELECT Id, Title FROM Articles"; // جلب ID و Title من الجدول
+                string query = "SELECT Id, Title FROM Articles"; // 
 
                 OracleDataAdapter adapter = new OracleDataAdapter(query, connStr);
                 DataSet articlesTable = new DataSet();
@@ -459,7 +458,7 @@ namespace Magazine_Management_System
             if (radioButton4.Checked)
             {
                 string connStr = "Data Source=orcl;User Id=scott;Password=tiger;";
-                string query = "SELECT id, name FROM Users"; // تعديل الاستعلام ليجلب الاسم
+                string query = "SELECT id, name FROM Users"; // 
 
                 using (OracleConnection conn = new OracleConnection(connStr))
                 {
@@ -468,8 +467,8 @@ namespace Magazine_Management_System
                     adapter.Fill(userTable);
 
                     comboBox5.DataSource = userTable.Tables[0];
-                    comboBox5.DisplayMember = "name";   // عرض الاسم في الكومبو بوكس
-                    comboBox5.ValueMember = "id";       // الاحتفاظ بالـ id كمفتاح
+                    comboBox5.DisplayMember = "name";   // 
+                    comboBox5.ValueMember = "id";        
                 }
             }
         }
@@ -534,6 +533,14 @@ namespace Magazine_Management_System
         {
             e.Row.Cells["Published_Time"].Value = DateTime.Today;
 
+        }
+        //logout
+        private void button13_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            this.FindForm().Visible = false;
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
         }
     }
 }

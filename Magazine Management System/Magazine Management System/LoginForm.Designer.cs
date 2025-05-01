@@ -91,6 +91,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1250, 900);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label8
             // 
@@ -200,7 +201,7 @@
             this.label7.Location = new System.Drawing.Point(16, 127);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(199, 32);
+            this.label7.Size = new System.Drawing.Size(200, 32);
             this.label7.TabIndex = 106;
             this.label7.Text = "New Passowrd";
             // 
@@ -237,7 +238,7 @@
             this.label5.Location = new System.Drawing.Point(16, 196);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(248, 32);
+            this.label5.Size = new System.Drawing.Size(249, 32);
             this.label5.TabIndex = 104;
             this.label5.Text = "Confirm Passowrd";
             // 
@@ -430,7 +431,7 @@
             this.textBox1.Size = new System.Drawing.Size(391, 36);
             this.textBox1.TabIndex = 82;
             // 
-            // Login
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -438,7 +439,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Login";
+            this.Name = "LoginForm";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);

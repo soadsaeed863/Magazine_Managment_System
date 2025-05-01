@@ -40,5 +40,10 @@ namespace Magazine_Management_System
             register1.Show();
             this.Hide();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

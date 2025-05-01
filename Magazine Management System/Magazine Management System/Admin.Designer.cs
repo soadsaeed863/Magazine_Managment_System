@@ -51,6 +51,7 @@ namespace Magazine_Management_System
             this.button12 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button13 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +117,7 @@ namespace Magazine_Management_System
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(192, 34);
+            this.comboBox2.Location = new System.Drawing.Point(189, 29);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(260, 24);
             this.comboBox2.TabIndex = 7;
@@ -218,7 +219,7 @@ namespace Magazine_Management_System
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(12, 484);
+            this.radioButton4.Location = new System.Drawing.Point(12, 445);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(121, 21);
             this.radioButton4.TabIndex = 19;
@@ -276,9 +277,21 @@ namespace Magazine_Management_System
             this.textBox1.Size = new System.Drawing.Size(135, 22);
             this.textBox1.TabIndex = 24;
             // 
-            // Form1
+            // button13
+            // 
+            this.button13.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.Location = new System.Drawing.Point(24, 488);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(109, 35);
+            this.button13.TabIndex = 25;
+            this.button13.Text = "Log out";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // Admin
             // 
             this.ClientSize = new System.Drawing.Size(882, 544);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.button12);
@@ -302,7 +315,7 @@ namespace Magazine_Management_System
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "Form1";
+            this.Name = "Admin";
             this.Text = "Admin";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -343,5 +356,6 @@ namespace Magazine_Management_System
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button13;
     }
 }

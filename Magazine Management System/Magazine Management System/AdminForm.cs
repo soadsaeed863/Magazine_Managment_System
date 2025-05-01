@@ -22,5 +22,10 @@ namespace Magazine_Management_System
         {
             Application.Exit();
         }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -239,7 +239,9 @@ namespace Magazine_Managment_System
             Pass(textBox8, pictureBox3, pictureBox4);
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
-
+        }
     }
 }

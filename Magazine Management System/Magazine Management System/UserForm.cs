@@ -54,5 +54,15 @@ namespace Magazine_Management_System
             MainForm mainForm = new MainForm();
             mainForm.Show();
         }
+
+        private void homeIcon_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void profilePicture_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
