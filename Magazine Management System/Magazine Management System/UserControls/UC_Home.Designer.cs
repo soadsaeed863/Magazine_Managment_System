@@ -28,19 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.sectionPanel = new System.Windows.Forms.Panel();
+            this.section_flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.sectionPanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // sectionPanel
+            // 
+            this.sectionPanel.Controls.Add(this.section_flow);
+            this.sectionPanel.Location = new System.Drawing.Point(205, 4);
+            this.sectionPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.sectionPanel.Name = "sectionPanel";
+            this.sectionPanel.Size = new System.Drawing.Size(924, 60);
+            this.sectionPanel.TabIndex = 0;
+            // 
+            // section_flow
+            // 
+            this.section_flow.AutoScroll = true;
+            this.section_flow.Location = new System.Drawing.Point(0, 0);
+            this.section_flow.Margin = new System.Windows.Forms.Padding(10);
+            this.section_flow.Name = "section_flow";
+            this.section_flow.Padding = new System.Windows.Forms.Padding(10);
+            this.section_flow.Size = new System.Drawing.Size(924, 60);
+            this.section_flow.TabIndex = 5;
             // 
             // UC_Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.sectionPanel);
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "UC_Home";
-            this.Size = new System.Drawing.Size(1232, 789);
+            this.Size = new System.Drawing.Size(1643, 1032);
+            this.Load += new System.EventHandler(this.UC_Home_Load);
+            this.sectionPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel sectionPanel;
+        private System.Windows.Forms.FlowLayoutPanel section_flow;
     }
 }
