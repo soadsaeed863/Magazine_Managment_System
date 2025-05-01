@@ -258,5 +258,15 @@
   <ItemGroup>
     <None Include="Resources\logout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\cryreport\cryreport\cryreport.csproj">
+      <Project>{f9ee0cd7-7871-4fb3-8d2e-ee74e4a94787}</Project>
+      <Name>cryreport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\summary_furmola\summary_furmola\summary_furmola.csproj">
+      <Project>{95c6643c-af95-48d2-b2c8-af3265faa3fc}</Project>
+      <Name>summary_furmola</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

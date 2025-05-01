@@ -52,6 +52,8 @@ namespace Magazine_Management_System
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -288,9 +290,31 @@ namespace Magazine_Management_System
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(12, 128);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(118, 29);
+            this.button14.TabIndex = 26;
+            this.button14.Text = "Articles Report";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(12, 315);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(135, 30);
+            this.button15.TabIndex = 27;
+            this.button15.Text = "Comments Report";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // Admin
             // 
             this.ClientSize = new System.Drawing.Size(882, 544);
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.radioButton2);
@@ -357,5 +381,7 @@ namespace Magazine_Management_System
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }
