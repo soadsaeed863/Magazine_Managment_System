@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.topPanel = new System.Windows.Forms.Panel();
-            this.innerTopPanel = new System.Windows.Forms.Panel();
-            this.containerPanel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.logoutbtn = new System.Windows.Forms.PictureBox();
+            this.innerTopPanel = new System.Windows.Forms.Panel();
             this.profilePicture = new System.Windows.Forms.PictureBox();
             this.homeIcon = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.containerPanel = new System.Windows.Forms.Panel();
             this.topPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoutbtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePicture)).BeginInit();
@@ -54,23 +54,12 @@
             this.topPanel.Size = new System.Drawing.Size(1232, 64);
             this.topPanel.TabIndex = 0;
             // 
-            // innerTopPanel
+            // textBox1
             // 
-            this.innerTopPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.innerTopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.innerTopPanel.Location = new System.Drawing.Point(0, 63);
-            this.innerTopPanel.Name = "innerTopPanel";
-            this.innerTopPanel.Size = new System.Drawing.Size(1232, 1);
-            this.innerTopPanel.TabIndex = 0;
-            // 
-            // containerPanel
-            // 
-            this.containerPanel.AutoScroll = true;
-            this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.containerPanel.Location = new System.Drawing.Point(0, 64);
-            this.containerPanel.Name = "containerPanel";
-            this.containerPanel.Size = new System.Drawing.Size(1232, 789);
-            this.containerPanel.TabIndex = 1;
+            this.textBox1.Location = new System.Drawing.Point(102, 33);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(710, 22);
+            this.textBox1.TabIndex = 2;
             // 
             // logoutbtn
             // 
@@ -82,6 +71,15 @@
             this.logoutbtn.TabIndex = 1;
             this.logoutbtn.TabStop = false;
             this.logoutbtn.Click += new System.EventHandler(this.logoutbtn_Click);
+            // 
+            // innerTopPanel
+            // 
+            this.innerTopPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.innerTopPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.innerTopPanel.Location = new System.Drawing.Point(0, 63);
+            this.innerTopPanel.Name = "innerTopPanel";
+            this.innerTopPanel.Size = new System.Drawing.Size(1232, 1);
+            this.innerTopPanel.TabIndex = 0;
             // 
             // profilePicture
             // 
@@ -103,12 +101,14 @@
             this.homeIcon.TabIndex = 0;
             this.homeIcon.TabStop = false;
             // 
-            // textBox1
+            // containerPanel
             // 
-            this.textBox1.Location = new System.Drawing.Point(102, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(710, 22);
-            this.textBox1.TabIndex = 2;
+            this.containerPanel.AutoScroll = true;
+            this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.containerPanel.Location = new System.Drawing.Point(0, 64);
+            this.containerPanel.Name = "containerPanel";
+            this.containerPanel.Size = new System.Drawing.Size(1232, 789);
+            this.containerPanel.TabIndex = 1;
             // 
             // UserForm
             // 
@@ -132,11 +132,11 @@
         #endregion
 
         private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Panel containerPanel;
         private System.Windows.Forms.PictureBox homeIcon;
         private System.Windows.Forms.PictureBox profilePicture;
         private System.Windows.Forms.Panel innerTopPanel;
         private System.Windows.Forms.PictureBox logoutbtn;
         private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Panel containerPanel;
     }
 }

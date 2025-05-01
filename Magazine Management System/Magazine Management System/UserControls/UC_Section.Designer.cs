@@ -32,7 +32,6 @@
             this.secDetailsLbl = new System.Windows.Forms.Label();
             this.followbtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
@@ -77,23 +76,13 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Latest Articles";
             // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(492, 727);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(198, 41);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "See More";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 227);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1232, 461);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1232, 562);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
             // UC_Section
@@ -101,7 +90,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.followbtn);
             this.Controls.Add(this.secDetailsLbl);
@@ -121,7 +109,6 @@
         private System.Windows.Forms.Label secDetailsLbl;
         private System.Windows.Forms.Button followbtn;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

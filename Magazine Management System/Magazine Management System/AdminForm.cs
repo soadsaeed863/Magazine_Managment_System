@@ -12,9 +12,11 @@ namespace Magazine_Management_System
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+        int adminID;
+        public AdminForm(int adminID)
         {
             InitializeComponent();
+            this.adminID=adminID;
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {

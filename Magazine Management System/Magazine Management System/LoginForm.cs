@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Magazine_Management_System;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
 namespace Magazine_Managment_System
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
         string ordb = "Data source=orcl;User Id=scott; Password = tiger;";
         OracleConnection conn;
         OracleCommand cmd = new OracleCommand();
         OracleDataAdapter da = new OracleDataAdapter();
-
-        public Login()
+        public LoginForm()
         {
 
             //cmd.Connection = conn;
@@ -33,7 +33,7 @@ namespace Magazine_Managment_System
             //loginToRegister
             Form1 register = new Form1();
             register.Show();
-            this.Hide();
+            this.Close();
         }
 
 
@@ -48,7 +48,7 @@ namespace Magazine_Managment_System
             using (conn = new OracleConnection(ordb))
             {
                 conn.Open();
-                cmd = new OracleCommand("SELECT * FROM Users WHERE Name = :Name AND Password = :pass", conn);
+                cmd = new OracleCommand("SELECT u.*, ur.name AS role_name FROM users u, userroles  ur WHERE u.role_id = ur.id AND u.name = :Name AND u.password = :pass", conn);
                 cmd.Parameters.Add(":Name", textBox1.Text.Trim());
                 cmd.Parameters.Add(":pass", textBox2.Text);
 
@@ -56,8 +56,13 @@ namespace Magazine_Managment_System
                 if (dr.Read())
                 {
                     MessageBox.Show("Login Successful", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    new Form1().Show();
-                    this.Hide();
+                    if (dr["role_name"].ToString() == "Admin")
+                    
+                        new AdminForm(Convert.ToInt32(dr["id"])).Show();
+                    
+                    else
+                        new UserForm(Convert.ToInt32(dr["id"])).Show(); 
+                    this.Close();
                 }
                 else
                 {

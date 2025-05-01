@@ -17,17 +17,17 @@ namespace Magazine_Management_System.UserControls
     {
         string ordb = "Data Source=orcl;User Id=scott;Password=tiger;";
         OracleConnection conn;
-        int userID =2;
+        int userID ;
         int sectionId =1;
         string setionName="Fashon";
         int followers = 0;
         int articles = 0;
-        //private DataSet ds;
-        //int rows=0;
-        //int columns=0;
-        public UC_Section()
+
+        public UC_Section(int sectionID,int userID)
         {
             InitializeComponent();
+            this.sectionId = sectionID;
+            this.userID = userID;
         }
         public void viewArticles()
         {
@@ -68,7 +68,7 @@ namespace Magazine_Management_System.UserControls
                 {
                     comments = Convert.ToInt32(commentsReader[0]);
                 }
-                ArticleCard articleCard = new ArticleCard(reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reacts, comments);
+                ArticleCard articleCard = new ArticleCard(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reacts, comments);
                 flowLayoutPanel1.Controls.Add(articleCard);
             }
             conn.Close();

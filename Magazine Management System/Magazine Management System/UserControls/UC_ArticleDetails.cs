@@ -13,17 +13,20 @@ namespace Magazine_Managment_System.UserControls
 {
     public partial class UC_ArticleDetails : UserControl
     {
-
-        string ordb = "Data source=orcl;User Id=hr; Password=hr;";
+        int articleId;
+        string ordb = "Data source=orcl;User Id=scott; Password=tiger;";
         OracleConnection conn;
-        public UC_ArticleDetails()
+        public UC_ArticleDetails(int articleId )
         {
             InitializeComponent();
+            this.articleId = articleId;
         }
 
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            conn = new OracleConnection(ordb);
+            conn.Open();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = conn;
             cmd.CommandText = "GetMagazineByID";
@@ -43,7 +46,7 @@ namespace Magazine_Managment_System.UserControls
             comboBox4.Text = cmd.Parameters["p_publisher_name"].Value.ToString();
             comboBox3.Text = cmd.Parameters["p_section_id"].Value.ToString();
             comboBox3.Text = cmd.Parameters["p_published_Time"].Value.ToString();
-
+            conn.Close();
 
         }
 
@@ -59,6 +62,8 @@ namespace Magazine_Managment_System.UserControls
 
         private void button2_Click(object sender, EventArgs e)
         {
+            conn = new OracleConnection(ordb);
+            conn.Open();
             string cmdstring = "insert into Articles Values(:aId,:Title,:cont,:pn,:psi,TO_DATE(:pubTime, 'DD-MON-RR'),0,0,0)";
             OracleCommand cmdSelect = new OracleCommand(cmdstring, conn);
             cmdSelect.Parameters.Add(":aId", comboBox1.Text);
@@ -72,12 +77,14 @@ namespace Magazine_Managment_System.UserControls
             {
                 MessageBox.Show("Added Successfully");
             }
+            conn.Close();
         }
 
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            conn = new OracleConnection(ordb);
+            conn.Open();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = conn;
             cmd.CommandText = "GetAllArticles";
@@ -96,6 +103,7 @@ namespace Magazine_Managment_System.UserControls
                 comboBox6.Text = dr[6].ToString();
             }
             dr.Close();
+            conn.Close();
         }
 
 

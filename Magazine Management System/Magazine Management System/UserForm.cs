@@ -18,11 +18,13 @@ namespace Magazine_Management_System
     {
         string ordb = "Data Source=orcl;User Id=scott;Password=tiger;";
         OracleConnection conn;
-        public UserForm()
+        int userID;
+        public UserForm(int userID)
         {
             InitializeComponent();
             profilePicture.Click += new EventHandler(profilePicture_Click);
             homeIcon.Click += new EventHandler(homeIcon_Click);
+            this.userID = userID;
         }
         private void profilePicture_Click(object sender, EventArgs e)
         {
@@ -35,7 +37,7 @@ namespace Magazine_Management_System
 
         private void homeIcon_Click(object sender, EventArgs e)
         {
-            UC_Section homeControl = new UC_Section();
+            UC_Section homeControl = new UC_Section(1,2);
             homeControl.Dock = DockStyle.Fill;
             containerPanel.Controls.Clear();
             containerPanel.Controls.Add(homeControl);

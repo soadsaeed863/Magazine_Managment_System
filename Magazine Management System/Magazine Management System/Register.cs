@@ -29,9 +29,9 @@ namespace Magazine_Managment_System
         private void label13_Click(object sender, EventArgs e)
         {
             //RegisterToLogin
-            Login login = new Login();
+            LoginForm login = new LoginForm();
             login.Show();
-            this.Hide();
+            this.Close();
         }
         //import btn
         private void button3_Click(object sender, EventArgs e)
@@ -197,14 +197,13 @@ namespace Magazine_Managment_System
             //MessageBox.Show(Image.)
             int r = cmd.ExecuteNonQuery();
 
-
             if (r != -1)
             {
                 MessageBox.Show($"{textBox1.Text} Registered Successfully");
                 //RegisterToLogin
-                Login login = new Login();
+                LoginForm login = new LoginForm();
                 login.Show();
-                this.Hide();
+                this.Close();
             }
             else
             {

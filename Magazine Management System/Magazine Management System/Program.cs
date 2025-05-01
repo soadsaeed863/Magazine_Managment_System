@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 //using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using Magazine_Management_System;
 
 namespace Magazine_Managment_System
 {
@@ -19,7 +20,7 @@ namespace Magazine_Managment_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new MainForm());
         }
     }
 }
