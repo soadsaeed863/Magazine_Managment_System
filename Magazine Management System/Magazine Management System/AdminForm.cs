@@ -18,7 +18,7 @@ namespace Magazine_Management_System
             InitializeComponent();
             this.adminID=adminID;
         }
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }

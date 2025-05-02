@@ -207,6 +207,11 @@ namespace Magazine_Managment_System
         {
 
         }
+
+        private void Login_Closing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 

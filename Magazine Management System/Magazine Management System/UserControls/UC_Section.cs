@@ -33,6 +33,7 @@ namespace Magazine_Management_System.UserControls
         {
             int comments = 0;
             int reacts = 0;
+            int articleCount = 0;
             conn = new OracleConnection(ordb);
             conn.Open();
             OracleCommand cmd = new OracleCommand();
@@ -41,7 +42,7 @@ namespace Magazine_Management_System.UserControls
             cmd.Connection = conn;
             reactscmd.Connection = conn;
             commentscmd.Connection = conn;
-            cmd.CommandText = "select id,photo,title,published_time from articles where section_id = :secId";
+            cmd.CommandText = "select id,photo,title,published_time from articles where section_id = :secId ORDER BY published_time DESC";
             cmd.Parameters.Add("secId", sectionId);
             cmd.CommandType = CommandType.Text;
             reactscmd.CommandType = CommandType.Text;
@@ -52,6 +53,7 @@ namespace Magazine_Management_System.UserControls
             OracleDataReader commentsReader;
             while (reader.Read())
             {
+                articleCount++;
                 reactscmd.CommandText = "select count(*) from reactions where article_id = :artId";
                 reactscmd.Parameters.Clear();
                 reactscmd.Parameters.Add("artId", reader[0]);
@@ -68,10 +70,15 @@ namespace Magazine_Management_System.UserControls
                 {
                     comments = Convert.ToInt32(commentsReader[0]);
                 }
-                ArticleCard articleCard = new ArticleCard(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reacts, comments);
+                ArticleCard articleCard = new ArticleCard(Convert.ToInt32(reader[0]), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reacts, comments,this.userID);
                 flowLayoutPanel1.Controls.Add(articleCard);
             }
             conn.Close();
+            if (articleCount == 0)
+            {
+                NoarticlePanel.Visible = true;
+                NoarticleLbl.Visible = true;
+            }
         }
         private void UC_Section_Load(object sender, EventArgs e)
         {
@@ -161,7 +168,7 @@ namespace Magazine_Management_System.UserControls
             {
                 followbtn.Text = "UnFollow";
             }
-            else 
+            else if (result != -1 && !follow)
             {
                 followbtn.Text = "Follow";
             }

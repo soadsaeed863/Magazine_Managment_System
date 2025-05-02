@@ -51,8 +51,7 @@
             this.titleLbl.Name = "titleLbl";
             this.titleLbl.Size = new System.Drawing.Size(361, 29);
             this.titleLbl.TabIndex = 1;
-            this.titleLbl.Text = "Top 10 Summer Fashion Trends and the power of trinding things and how to deal wit" +
-    "h everything";
+            this.titleLbl.Text = "Title";
             // 
             // panel1
             // 

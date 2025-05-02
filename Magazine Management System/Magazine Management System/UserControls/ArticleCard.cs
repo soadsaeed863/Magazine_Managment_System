@@ -8,22 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.HtmlControls;
 using System.Windows.Forms;
-using Magazine_Managment_System.UserControls;
 
 namespace Magazine_Management_System.UserControls
 {
     public partial class ArticleCard : UserControl
     {
-        private bool isMouseHovering = false;  // لتتبع ما إذا كان الماوس فوق الـ UserControl أم لا
 
-        //private DataRow row;
         int id;
         string img;
         string title;
         string date;
         int comments;
         int reacts;
-        public ArticleCard(int id,string img, string title, string date, int comments, int reacts)
+        int userID;
+        public ArticleCard(int id,string img, string title, string date, int comments, int reacts,int userID)
         {
             InitializeComponent();
 
@@ -33,7 +31,7 @@ namespace Magazine_Management_System.UserControls
             this.reacts = reacts;
             this.date = date;
             this.id = id;
-
+            this.userID = userID;
             this.MouseEnter += _MouseEnter;
             this.MouseLeave += _MouseLeave;
             this.Click += _Click;
@@ -66,11 +64,13 @@ namespace Magazine_Management_System.UserControls
 
         }
 
+
+
         public void viewDetails()
         {
-            titleLbl.AutoEllipsis = true;
 
-            //articleImg.Image = Image.FromFile(this.img);
+            titleLbl.AutoEllipsis = true;
+            articleImg.Image = Image.FromFile(this.img);
             titleLbl.Text = this.title;
             dateLbl.Text = this.date;
             reactsLbl.Text = this.reacts.ToString();
@@ -92,33 +92,8 @@ namespace Magazine_Management_System.UserControls
 
         private void _Click(object sender, EventArgs e)
         {
-            //var parentForm = this.FindForm();
-            //if (parentForm == null) return;
-
-            //var containerPanel = parentForm.Controls["containerPanel"] as Panel;
-            //if (containerPanel == null) return;
-
-            //// نحاول نلاقيه بالأسم
-            //var articleDetailsControl = containerPanel.Controls["UC_ArticleDetails"];
-
-            //// لو مش موجود نضيفه
-            //if (articleDetailsControl == null)
-            //{
-            //    articleDetailsControl = new UC_ArticleDetails(this.id);
-            //    articleDetailsControl.Name = "UC_ArticleDetails";
-            //    articleDetailsControl.Dock = DockStyle.Fill;
-            //    containerPanel.Controls.Add(articleDetailsControl);
-            //}
-
-            //// نخفي باقي الكنترولات
-            //foreach (Control ctrl in containerPanel.Controls)
-            //    ctrl.Visible = false;
-
-            //articleDetailsControl.Visible = true;
-
-
             UserForm parentForm = (UserForm)this.FindForm();
-            UC_ArticleDetails articleDetails = new UC_ArticleDetails(this.id);
+            ArticleDetails articleDetails = new ArticleDetails(this.id,this.userID);
             articleDetails.Dock = DockStyle.Fill;
             parentForm.containerPanel.Controls.Clear();
             parentForm.containerPanel.Controls.Add(articleDetails);

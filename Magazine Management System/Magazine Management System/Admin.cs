@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
-using summary_furmola;   
-using cryreport;
+//using summary_furmola;   
+//using cryreport;
 
 namespace Magazine_Management_System
 {
@@ -547,14 +547,20 @@ namespace Magazine_Management_System
 
         private void button15_Click(object sender, EventArgs e)
         {
-            cryreport.Form1 f2 = new cryreport.Form1(); 
-            f2.Show();
+            //cryreport.Form1 f2 = new cryreport.Form1(); 
+            //f2.Show();
         }
  
         private void button14_Click(object sender, EventArgs e)
         {
-            summary_furmola.Form1 f1 = new summary_furmola.Form1(); 
-            f1.Show();
+            //summary_furmola.Form1 f1 = new summary_furmola.Form1(); 
+            //f1.Show();
         }
+
+        private void Admin_Closing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

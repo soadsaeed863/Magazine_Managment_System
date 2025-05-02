@@ -134,17 +134,35 @@
     <Compile Include="UserControls\ArticleCard.Designer.cs">
       <DependentUpon>ArticleCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UC_ArticleDetails.cs">
+    <Compile Include="UserControls\CommentCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\UC_ArticleDetails.Designer.cs">
-      <DependentUpon>UC_ArticleDetails.cs</DependentUpon>
+    <Compile Include="UserControls\CommentCard.Designer.cs">
+      <DependentUpon>CommentCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Home.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ArticleDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ArticleDetails.Designer.cs">
+      <DependentUpon>ArticleDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UC_Home.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\UC_Home.Designer.cs">
       <DependentUpon>UC_Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_Search.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_Search.Designer.cs">
+      <DependentUpon>UC_Search.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UC_Section.cs">
       <SubType>UserControl</SubType>
@@ -201,11 +219,20 @@
     <EmbeddedResource Include="UserControls\ArticleCard.resx">
       <DependentUpon>ArticleCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UC_ArticleDetails.resx">
-      <DependentUpon>UC_ArticleDetails.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\CommentCard.resx">
+      <DependentUpon>CommentCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ArticleDetails.resx">
+      <DependentUpon>ArticleDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Home.resx">
       <DependentUpon>UC_Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Search.resx">
+      <DependentUpon>UC_Search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_Section.resx">
       <DependentUpon>UC_Section.cs</DependentUpon>
@@ -267,6 +294,75 @@
       <Project>{95c6643c-af95-48d2-b2c8-af3265faa3fc}</Project>
       <Name>summary_furmola</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unsaved.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\article1.jpg" />
+    <Content Include="Images\chat.png" />
+    <Content Include="Images\clap.png" />
+    <Content Include="Images\clock.png" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\logout.png" />
+    <Content Include="Images\profile-user.png" />
+    <Content Include="Images\saved.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\unsaved.png" />
+    <Content Include="Images\woman.png" />
+    <Content Include="Resources\admin1.jpg" />
+    <Content Include="Resources\alice.jpg" />
+    <Content Include="Resources\bob.jpg" />
+    <Content Include="Resources\carol.jpg" />
+    <Content Include="Resources\david.jpg" />
+    <Content Include="Resources\eve.jpg" />
+    <Content Include="Resources\fashion1.jpg" />
+    <Content Include="Resources\fashion2.png" />
+    <Content Include="Resources\fashion3.png" />
+    <Content Include="Resources\fashion4.jpg" />
+    <Content Include="Resources\fashion5.jpg" />
+    <Content Include="Resources\Followed_Sections and Reactions Tables.txt" />
+    <Content Include="Resources\food1.jpg" />
+    <Content Include="Resources\food2.jpg" />
+    <Content Include="Resources\food3.jpg" />
+    <Content Include="Resources\food4.jpg" />
+    <Content Include="Resources\food5.jpg" />
+    <Content Include="Resources\frank.jpg" />
+    <Content Include="Resources\grace.jpg" />
+    <Content Include="Resources\health1.jpg" />
+    <Content Include="Resources\health2.jpg" />
+    <Content Include="Resources\health3.jpg" />
+    <Content Include="Resources\health4.jpg" />
+    <Content Include="Resources\health5.png" />
+    <Content Include="Resources\henry.jpg" />
+    <Content Include="Resources\ivy.jpg" />
+    <Content Include="Resources\jack.jpg" />
+    <Content Include="Resources\lifestyle1.jpg" />
+    <Content Include="Resources\lifestyle2.png" />
+    <Content Include="Resources\lifestyle3.jpg" />
+    <Content Include="Resources\lifestyle4.png" />
+    <Content Include="Resources\lifestyle5.jpg" />
+    <Content Include="Resources\Magazine Management System Database.txt" />
+    <Content Include="Resources\saved.png" />
+    <Content Include="Resources\skincare1.jpg" />
+    <Content Include="Resources\skincare2.jpg" />
+    <Content Include="Resources\skincare3.jpg" />
+    <Content Include="Resources\skincare4.jpg" />
+    <Content Include="Resources\skincare5.jpg" />
+    <Content Include="Resources\sport1.jpg" />
+    <Content Include="Resources\sport2.jpeg" />
+    <Content Include="Resources\sport3.jpg" />
+    <Content Include="Resources\sport4.jpg" />
+    <Content Include="Resources\sport5.jpg" />
+    <Content Include="Resources\travel1.jpg" />
+    <Content Include="Resources\travel2.jpg" />
+    <Content Include="Resources\travel3.jpg" />
+    <Content Include="Resources\travel4.jpg" />
+    <Content Include="Resources\travel5.jpg" />
+    <None Include="Resources\saved1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

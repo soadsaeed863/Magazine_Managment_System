@@ -13,11 +13,13 @@ namespace Magazine_Management_System.ProfileControls
 {
     public partial class Fav : UserControl
     {
+        int userID;
         string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection connFav;
-        public Fav()
+        public Fav(int userID)
         {
             InitializeComponent();
+            this.userID = userID;
         }
 
         private void Fav_Load(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace Magazine_Management_System.ProfileControls
             OracleCommand cmd = connFav.CreateCommand();
             cmd.Connection = connFav;
             cmd.CommandText = "GetFav";
-            cmd.Parameters.Add("id", 2);
+            cmd.Parameters.Add("id", this.userID);
             cmd.Parameters.Add("articleinfo", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
             cmd.CommandType = CommandType.StoredProcedure;
             OracleDataReader dr = cmd.ExecuteReader();

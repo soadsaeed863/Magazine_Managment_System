@@ -17,29 +17,31 @@ namespace Magazine_Management_System.ProfileControls
     {
         string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection connDel;
-        public Delete()
+        int userID;
+        public Delete(int userID)
         {
             InitializeComponent();
+            this.userID = userID;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //connDel = new OracleConnection();
-            //connDel.ConnectionString = ordb;
-            //connDel.Open();
-            //OracleCommand cmd = new OracleCommand();
-            //cmd.Connection = connDel;
-            //cmd.CommandText = "Delete from Users where id =: id";
-            //cmd.Parameters.Add("id", 1);
-            //cmd.CommandType = CommandType.Text;
-            //int r = cmd.ExecuteNonQuery();
-            //if (r != -1)
-            //{
-            this.Visible = false;
+            connDel = new OracleConnection();
+            connDel.ConnectionString = ordb;
+            connDel.Open();
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = connDel;
+            cmd.CommandText = "Delete from Users where id =: id";
+            cmd.Parameters.Add("id", this.userID);
+            cmd.CommandType = CommandType.Text;
+            int r = cmd.ExecuteNonQuery();
+            if (r != -1)
+            {
+                this.Visible = false;
             this.FindForm().Visible = false;
             MainForm mainForm = new MainForm();
             mainForm.Show();
-            //}
         }
+    }
     }
 }

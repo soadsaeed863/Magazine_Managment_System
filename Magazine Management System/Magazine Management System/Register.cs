@@ -188,7 +188,7 @@ namespace Magazine_Managment_System
             cmd.Parameters.Add(":Role_ID", comboBox1.SelectedIndex);
             cmd.Parameters.Add(":PhoneNumber", textBox5.Text);
             cmd.Parameters.Add(":SecQues", textBox6.Text);
-            cmd.Parameters.Add(":ProfilePic", OracleDbType.Blob).Value = imageBytes;
+            cmd.Parameters.Add(":ProfilePic", guna2CirclePictureBox1.ImageLocation);
             //if (imageBytes == null)
             //{
             //    MessageBox.Show("Please upload a profile picture first!", "Not imported image", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -242,6 +242,10 @@ namespace Magazine_Managment_System
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+        private void Register_Closing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

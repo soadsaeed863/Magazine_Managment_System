@@ -17,10 +17,11 @@ namespace Magazine_Management_System.UserControls
     {
         string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection conn;
-        public UC_UserProfile()
+        int userID;
+        public UC_UserProfile(int userID)
         {
             InitializeComponent();
- 
+            this.userID = userID;
         }
         private void addProfileCon(System.Windows.Forms.UserControl uc)
         {
@@ -37,7 +38,7 @@ namespace Magazine_Management_System.UserControls
             OracleCommand cmd =  new OracleCommand();
             cmd.Connection = conn;
             cmd.CommandText = "select Name,ProfilePic from Users where id =: id";
-            cmd.Parameters.Add("id", 2);
+            cmd.Parameters.Add("id", this.userID);
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
@@ -59,14 +60,14 @@ namespace Magazine_Management_System.UserControls
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Edit edit = new Edit();
+            Edit edit = new Edit(this.userID);
             addProfileCon(edit);
            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Fav fav = new Fav();
+            Fav fav = new Fav(this.userID);
             addProfileCon(fav);
         }
 
@@ -78,7 +79,7 @@ namespace Magazine_Management_System.UserControls
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            Delete delete = new Delete();
+            Delete delete = new Delete(this.userID);
             addProfileCon(delete);
         }
     }

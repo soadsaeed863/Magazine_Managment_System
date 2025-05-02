@@ -16,9 +16,11 @@ namespace Magazine_Management_System.ProfileControls
     {
         string ordb = "Data Source = ORCL ; User Id = scott ; Password = tiger;";
         OracleConnection connEdit;
-        public Edit()
+        int userID;
+        public Edit(int userID)
         {
             InitializeComponent();
+            this.userID = userID;
         }
 
         private void Edit_Load(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace Magazine_Management_System.ProfileControls
             OracleCommand cmd = connEdit.CreateCommand();
             cmd.Connection = connEdit;
             cmd.CommandText = "select PASSWORD,ProfilePic,PHONENUMBER,SECQUES from Users where id =: id";
-            cmd.Parameters.Add("id", 2);
+            cmd.Parameters.Add("id", this.userID);
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
@@ -68,7 +70,7 @@ namespace Magazine_Management_System.ProfileControls
             cmd.Parameters.Add("url", URL.Text);
             cmd.Parameters.Add("phone", PhoneNum.Text);
             cmd.Parameters.Add("secret", SecQu.Text);
-            cmd.Parameters.Add("id", 2);
+            cmd.Parameters.Add("id", this.userID);
 
             int r = cmd.ExecuteNonQuery();
             if (r != -1)

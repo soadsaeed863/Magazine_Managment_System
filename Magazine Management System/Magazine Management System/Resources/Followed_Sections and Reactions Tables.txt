@@ -1,0 +1,50 @@
+CREATE TABLE Followed_Sections (
+    user_id     NUMBER,
+    section_id  NUMBER,
+    
+    CONSTRAINT pk_followed_sections
+        PRIMARY KEY (user_id, section_id),
+    
+    CONSTRAINT fk_follow_user
+        FOREIGN KEY (user_id)
+        REFERENCES Users(user_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_follow_section
+        FOREIGN KEY (section_id)
+        REFERENCES Sections(section_id)
+        ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE Reactions (
+    user_id     NUMBER,
+    article_id  NUMBER,
+
+    CONSTRAINT pk_reactions
+        PRIMARY KEY (user_id, article_id),
+
+    CONSTRAINT fk_react_user
+        FOREIGN KEY (user_id)
+        REFERENCES Users(user_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_react_article
+        FOREIGN KEY (article_id)
+        REFERENCES Articles(article_id)
+        ON DELETE CASCADE
+);
+
+
+ 
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (,);
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (,);
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (,);
+
+
+
+INSERT INTO Reactions (user_id, article_id) VALUES (,);
+INSERT INTO Reactions (user_id, article_id) VALUES (,);
+INSERT INTO Reactions (user_id, article_id) VALUES (,);
+

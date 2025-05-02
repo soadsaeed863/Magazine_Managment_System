@@ -1,0 +1,814 @@
+--creating tables
+create TABLE userRoles (
+Id INT primary key,
+Name VARCHAR(100) NOT NULL 
+);
+
+create TABLE Users (
+id int PRIMARY KEY,
+Name VARCHAR2(100) NOT NULL,
+Email VARCHAR2(100) NOT NULL ,
+CONSTRAINT chk_email CHECK (Email LIKE '%@%.%'),
+Password VARCHAR2(100) NOT NULL,
+Role_ID NUMBER(6) NOT NULL,
+PhoneNumber VARCHAR2(11) NOT NULL,
+CONSTRAINT chk_phone_length CHECK (LENGTH(PhoneNumber) = 11),
+SecQues NUMBER(3) UNIQUE NOT NULL,
+ProfilePic varchar2(200) NOT NULL,
+CONSTRAINT fk_role
+        FOREIGN KEY (Role_ID)
+        REFERENCES userRoles(Id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Sections (
+    ID NUMBER PRIMARY KEY NOT NULL,
+    name VARCHAR2(255),
+    description VARCHAR2(600)
+);
+
+create table Articles (
+Id Number(5) primary key,
+Title  varchar2(200) NOT NULL,
+Content  varchar2(4000) NOT NULL,
+Publisher_Name   varchar2(100) NOT NULL,
+Section_Id Number(5),
+Photo varchar2(200) NOT NULL,
+Published_Time  DATE NOT NULL,
+FOREIGN KEY (Section_Id) REFERENCES Sections(ID)ON DELETE CASCADE);
+
+CREATE TABLE Favorites (
+    user_id    NUMBER,
+    article_id NUMBER,
+    
+    CONSTRAINT pk_favorites PRIMARY KEY (user_id, article_id),
+    
+    CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES Users(ID)ON DELETE CASCADE,
+    CONSTRAINT fk_article FOREIGN KEY (article_id) REFERENCES Articles(ID)ON DELETE CASCADE
+);
+
+CREATE TABLE Followed_Sections (
+    user_id     NUMBER,
+    section_id  NUMBER,
+    
+    CONSTRAINT pk_followed_sections
+        PRIMARY KEY (user_id, section_id),
+    
+    CONSTRAINT fk_follow_user
+        FOREIGN KEY (user_id)
+        REFERENCES Users(ID)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_follow_section
+        FOREIGN KEY (section_id)
+        REFERENCES Sections(ID)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Reactions (
+    user_id     NUMBER,
+    article_id  NUMBER,
+
+    CONSTRAINT pk_reactions
+        PRIMARY KEY (user_id, article_id),
+
+    CONSTRAINT fk_react_user
+        FOREIGN KEY (user_id)
+        REFERENCES Users(ID)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_react_article
+        FOREIGN KEY (article_id)
+        REFERENCES Articles(ID)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE Comments (
+Id          NUMBER PRIMARY KEY,
+Article_id  NUMBER,
+User_id     NUMBER,
+Comment_Time DATE,
+Commenttext    VARCHAR2(2000),
+
+CONSTRAINT fk_articles FOREIGN KEY (Article_id) REFERENCES Articles(Id)ON DELETE CASCADE,
+CONSTRAINT fk_userss    FOREIGN KEY (User_id) REFERENCES Users(Id)ON DELETE CASCADE
+);
+
+create table Notifications(
+NotificationId int primary key,
+UserId int,
+ArticleId number,
+Notification_content varchar(1000) not null,
+NotificationTime date,
+IsRead  NUMBER(1) DEFAULT 0,
+
+constraint fk_user foreign key(UserId) references Users(Id)ON DELETE CASCADE,
+constraint fk_artiNoti foreign key(ArticleId) references Articles(Id)ON DELETE CASCADE
+);
+
+
+--creating sequences
+--Users
+ CREATE SEQUENCE users_seq
+    START WITH 179206
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+/
+
+-- Sections 
+CREATE SEQUENCE sections_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+/
+-- Articles 
+CREATE SEQUENCE articles_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+/
+-- Notifications
+CREATE SEQUENCE notifications_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+/
+-- Comments
+CREATE SEQUENCE comment_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+/
+ --creating trigers
+ -- Users
+ CREATE OR REPLACE TRIGGER users_before_insert
+BEFORE INSERT ON Users
+FOR EACH ROW
+BEGIN
+    IF :NEW.id IS NULL THEN
+        :NEW.id := users_seq.NEXTVAL;
+    END IF;
+END;
+/
+
+  -- Sections
+CREATE OR REPLACE TRIGGER sections_before_insert
+BEFORE INSERT ON Sections
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID IS NULL THEN
+        :NEW.ID := sections_seq.NEXTVAL;
+    END IF;
+END;
+/
+
+--Articles
+CREATE OR REPLACE TRIGGER articles_before_insert
+BEFORE INSERT ON Articles
+FOR EACH ROW
+BEGIN
+    IF :NEW.Id IS NULL THEN
+        :NEW.Id := articles_seq.NEXTVAL;
+    END IF;
+END;
+/
+
+-- Comments
+CREATE OR REPLACE TRIGGER comments_before_insert
+BEFORE INSERT ON Comments
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID IS NULL THEN
+        :NEW.ID := comment_seq.NEXTVAL;
+    END IF;
+END;
+/
+
+-- Notification
+CREATE OR REPLACE TRIGGER notifications_before_insert
+BEFORE INSERT ON Notifications
+FOR EACH ROW
+BEGIN
+    IF :NEW.NotificationId IS NULL THEN
+        :NEW.NotificationId := notifications_seq.NEXTVAL;
+    END IF;
+END;
+/
+
+-- insertions
+-- userRoles
+INSERT INTO userRoles (Id, Name) VALUES (0, 'Admin');
+INSERT INTO userRoles (Id, Name) VALUES (1, 'User');
+
+-- Users
+-- Admin user
+INSERT INTO Users ( Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Alice Admin', 'alice.admin@example.com', 'admin123', 0, '01234567890', 344, 'admin1.jpg');
+
+-- Regular users
+-- Inserting users with SecQues as last 3 digits of national ID
+INSERT INTO Users ( Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Alice Johnson', 'alice.johnson@example.com', 'password123', 1, '01012345678', 678, 'alice.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Bob Smith', 'bob.smith@example.com', 'password456', 1, '01098765432', 432, 'bob.jpg');
+
+INSERT INTO Users ( Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Carol Davis', 'carol.davis@example.com', 'password789', 1, '01112345678', 578, 'carol.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('David Lee', 'david.lee@example.com', 'password101', 1, '01123456789', 789, 'david.jpg');
+
+INSERT INTO Users ( Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Eve Green', 'eve.green@example.com', 'password102', 1, '01234567890', 890, 'eve.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Frank White', 'frank.white@example.com', 'password103', 1, '01298765432', 434, 'frank.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Grace Brown', 'grace.brown@example.com', 'password104', 1, '01312345678', 680, 'grace.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Henry Blue', 'henry.blue@example.com', 'password105', 1, '01398765432', 435, 'henry.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Ivy Black', 'ivy.black@example.com', 'password106', 1, '01412345678', 674, 'ivy.jpg');
+
+INSERT INTO Users (Name, Email, Password, Role_ID, PhoneNumber, SecQues, ProfilePic) 
+VALUES ('Jack Red', 'jack.red@example.com', 'password107', 1, '01498765432', 480, 'jack.jpg');
+
+-- Sections
+INSERT INTO Sections (name, description) VALUES ('Fashion', 'All about the latest fashion trends, designs, and clothing.');
+INSERT INTO Sections (name, description) VALUES ('Food', 'Recipes, food trends, and culinary tips for all.');
+INSERT INTO Sections (name, description) VALUES ('Skin Care', 'Latest skincare tips, routines, and product reviews.');
+INSERT INTO Sections (name, description) VALUES ('Health', 'Tips for living a healthy life, including exercise, nutrition, and wellness.');
+INSERT INTO Sections (name, description) VALUES ('Sport', 'Sports news, updates, and fitness guides.');
+INSERT INTO Sections (name, description) VALUES ('Lifestyle', 'Tips, guides, and inspiration for living a balanced and fulfilling life.');
+INSERT INTO Sections (name, description) VALUES ('Travel', 'Travel destinations, tips, and experiences.');
+
+-- Articles
+-- Insert Articles for Fashion Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Fashion Trends 2025',
+  'As we step into 2025, fashion continues to evolve at a rapid pace. This year, bold colors, oversized silhouettes, and sustainable materials are taking center stage. Designers are embracing eco-conscious fashion, with many opting for organic fabrics, recycled materials, and cruelty-free production processes. From streetwear to high fashion, the emphasis is on individuality and expression. Whether you’re into vintage looks or futuristic styles, 2025 is the year to experiment and push boundaries.',
+  'John Doe',
+  1,
+  'fashion1.jpg',
+  TO_DATE('2025-01-01', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Must-Have Fashion Accessories',
+  'A list of fashion accessories you must have. These accessories will elevate your style, from bags and scarves to jewelry and hats. 2025 brings a wide range of trendy accessories that can complement any outfit, whether you’re dressing up for a formal event or going for a casual, everyday look. Some of the must-have accessories include chunky necklaces, oversized sunglasses, statement bags, and cozy scarves. These accessories are all about making a statement and adding personality to your outfits.',
+  'Jane Smith',
+  1,
+  'fashion2.png',
+  TO_DATE('2025-02-15', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Sustainable Fashion Brands',
+  'Exploring eco-friendly fashion brands. Sustainability is one of the most important trends in fashion today, and more brands are moving towards eco-friendly practices. From organic cotton to recycled fabrics, sustainable fashion brands are taking the lead in producing stylish clothes that are also good for the planet. This article dives into some of the top sustainable brands to watch in 2025, focusing on their innovative approaches to reducing waste, supporting fair trade, and creating environmentally conscious designs.',
+  'Mark Johnson',
+  1,
+  'fashion3.png',
+  TO_DATE('2025-03-01', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Top Fashion Shows 2025',
+  'Overview of top fashion shows happening in 2025. The fashion industry’s most anticipated events, the fashion shows, are coming up in 2025. From Paris to New York, the fashion capitals of the world will showcase the best designs of the year. This article highlights the most talked-about fashion shows of 2025, featuring exclusive collections, celebrity appearances, and the trends that will shape the fashion world in the upcoming year.',
+  'Emily Brown',
+  1,
+  'fashion4.jpg',
+  TO_DATE('2025-04-01', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Street Style Inspiration',
+  'Get inspired by street style from around the world. Street style has become a major influence on fashion, with people from all walks of life showcasing their unique style on the streets of major cities. From edgy, urban looks to minimalist elegance, street style offers endless inspiration for your wardrobe. In this article, we’ll explore some of the most fashionable cities in 2025, featuring their top street style trends and how you can incorporate them into your own look.',
+  'Sophia Lee',
+  1,
+  'fashion5.jpg',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+-- Insert Articles for Food Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Healthy Eating for 2025',
+  'In 2025, healthy eating habits are becoming more important than ever. With the rise of plant-based diets, intermittent fasting, and mindful eating, people are making more conscious choices about what they put into their bodies. This article explores the latest trends in healthy eating, focusing on nutrient-dense foods, sustainable farming practices, and how to make healthier food choices in your everyday life. Whether you’re looking to improve your diet or simply want to try something new, this guide has you covered.',
+  'John Doe',
+  2,
+  'food1.jpg',
+  TO_DATE('2025-01-02', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Vegan Recipes to Try',
+  'Veganism is gaining popularity in 2025, with more people looking for plant-based alternatives to traditional meals. This article showcases a variety of delicious and nutritious vegan recipes that can be easily incorporated into your lifestyle. From hearty soups and salads to indulgent desserts, these recipes are designed to help you eat healthy without sacrificing flavor. Whether you’re vegan or just looking to reduce your meat consumption, these dishes will inspire you to embrace a plant-based lifestyle.',
+  'Jane Smith',
+  2,
+  'food2.jpg',
+  TO_DATE('2025-02-20', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Quick Breakfast Ideas',
+  'Mornings can be hectic, but that doesn’t mean you should skip breakfast. In this article, we’ve gathered a list of quick and easy breakfast ideas to help you start your day on the right foot. From overnight oats to smoothie bowls, these recipes are perfect for busy mornings when you need something nutritious and filling in a hurry. Whether you prefer sweet or savory options, these breakfast ideas will keep you energized and ready to tackle the day.',
+  'Mark Johnson',
+  2,
+  'food3.jpg',
+  TO_DATE('2025-03-05', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Exploring International Cuisines',
+  'Traveling the world through food is one of the most exciting ways to experience new cultures. In this article, we take a deep dive into some of the world’s most delicious international cuisines. From the spicy dishes of Mexico to the fresh, vibrant flavors of Southeast Asia, international cuisines offer a wide range of tastes and cooking styles. This guide will introduce you to some must-try dishes from around the globe, along with tips on how to recreate them at home.',
+  'Emily Brown',
+  2,
+  'food4.jpg',
+  TO_DATE('2025-04-10', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Must-Try Desserts',
+  'There’s always room for dessert! This article highlights some of the most delicious and indulgent desserts that you simply must try. From decadent chocolate cakes to refreshing fruit tarts, these desserts are perfect for any occasion. Whether you’re looking to impress guests at a dinner party or satisfy your own sweet tooth, these must-try desserts will surely hit the spot. Get ready for a sugar rush as we explore some of the most irresistible desserts of 2025.',
+  'Sophia Lee',
+  2,
+  'food5.jpg',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+
+-- Insert Articles for Skin Care Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Top Skincare Products for 2025',
+  'In 2025, skincare trends are evolving with a focus on clean, sustainable beauty. This article reviews the best skincare products to try this year, including innovative formulations and eco-friendly packaging. Whether you’re looking for anti-aging serums, hydrating moisturizers, or acne-fighting treatments, we’ve compiled a list of must-have skincare products to elevate your routine. With new ingredients like CBD and adaptogens gaining popularity, this guide will help you stay ahead of the curve in the skincare world.',
+  'John Doe',
+  3,
+  'skincare1.jpg',
+  TO_DATE('2025-01-10', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Skincare Tips for Glowing Skin',
+  'Everyone wants that radiant, glowing skin. In this article, we share expert skincare tips to help you achieve a healthy, luminous complexion. From exfoliation techniques to the best serums and oils, these tips will help you maintain a youthful glow all year round. Whether you’re dealing with dryness, dullness, or uneven skin tone, our guide provides simple solutions to keep your skin looking fresh and dewy. Learn how to layer your skincare products and which ingredients to look for to boost your glow.',
+  'Jane Smith',
+  3,
+  'skincare2.jpg',
+  TO_DATE('2025-02-25', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Winter Skincare Routine',
+  'Winter can be harsh on your skin, leaving it dry and irritated. This article explores how to adjust your skincare routine for the colder months. We recommend hydrating face masks, thick moisturizers, and soothing serums that will protect your skin from the harsh winter air. Discover the best products to keep your skin moisturized, and learn the importance of sun protection, even in winter. With the right routine, you can keep your skin soft, smooth, and nourished despite the chilly weather.',
+  'Mark Johnson',
+  3,
+  'skincare3.jpg',
+  TO_DATE('2025-03-15', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Anti-Aging Skincare Secrets',
+  'As we age, our skincare needs change. In this article, we focus on anti-aging skincare routines that help maintain youthful skin. From retinol and peptides to collagen-boosting treatments, we’ve compiled a list of essential products and techniques that can help reduce the appearance of fine lines and wrinkles. Learn how to prevent sagging and promote skin elasticity with these tried-and-true anti-aging secrets. With the right approach, you can age gracefully and keep your skin looking youthful.',
+  'Emily Brown',
+  3,
+  'skincare4.jpg',
+  TO_DATE('2025-04-05', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Natural Skincare Remedies',
+  'Looking for natural ways to take care of your skin? This article dives into natural skincare remedies that can be incorporated into your daily routine. From DIY masks using honey and turmeric to aloe vera for sunburn relief, we explore a range of organic solutions that are both effective and gentle on the skin. Whether you prefer a holistic approach or simply want to avoid chemicals, these natural remedies will keep your skin healthy, glowing, and nourished.',
+  'Sophia Lee',
+  3,
+  'skincare5.jpg',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+
+
+-- Insert Articles for Health Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Mental Health Awareness',
+  'In 2025, mental health awareness is more important than ever. This article discusses the growing need to prioritize mental health and the steps we can take to reduce stigma and promote well-being. With more people seeking therapy and support, it is crucial to provide resources and education about mental health. This article aims to inspire individuals to take care of their mental health, identify signs of stress and anxiety, and explore treatment options such as therapy and medication. Let’s make mental health a priority in 2025 and beyond.',
+  'John Doe',
+  4,
+  'health1.jpg',
+  TO_DATE('2025-01-12', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Healthy Lifestyle Choices',
+  'Choosing a healthy lifestyle is key to maintaining long-term wellness. In this article, we cover the essential aspects of a healthy lifestyle, from balanced nutrition to regular exercise and stress management. Learn how to adopt habits that support your physical and mental health, including meal planning, daily workouts, and mindfulness practices. We’ll explore the benefits of healthy living and provide actionable tips for making sustainable changes to your daily routine. A healthy lifestyle is an investment in your future well-being.',
+  'Jane Smith',
+  4,
+  'health2.jpg',
+  TO_DATE('2025-02-28', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles ( Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+
+  'Fitness Tips for Beginners',
+  'Starting a fitness journey can feel overwhelming, but with the right tips, anyone can begin and succeed. This article offers practical advice for beginners who want to get started with fitness. From choosing the right exercises to understanding proper form, we’ve got you covered. Learn how to set realistic fitness goals, create a balanced workout routine, and stay motivated along the way. Whether you want to improve your strength, flexibility, or overall health, these beginner-friendly fitness tips will help you succeed.',
+  'Mark Johnson',
+  4,
+  'health3.jpg',
+  TO_DATE('2025-03-18', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Best Supplements for Health',
+  'Supplements can be an important addition to your health routine, especially if you’re looking to address specific health concerns. In this article, we review the best supplements for boosting immunity, improving energy levels, and promoting overall health. From vitamins and minerals to plant-based supplements, we explore options that can enhance your well-being. Learn about the benefits of probiotics, omega-3 fatty acids, and adaptogens, and find out which supplements are worth adding to your daily routine.',
+  'Emily Brown',
+  4,
+  'health4.jpg',
+  TO_DATE('2025-04-07', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Importance of Sleep',
+  'Sleep is one of the most important factors in maintaining good health, yet it’s often overlooked. This article explains why sleep is crucial for physical and mental well-being. We discuss how lack of sleep can affect your immune system, mood, and cognitive function, and provide tips for improving your sleep hygiene. Learn about the recommended sleep cycles for different age groups and how to create a sleep-friendly environment. Prioritizing quality sleep is essential for a healthy and productive life.',
+  'Sophia Lee',
+  4,
+  'health5.png',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+
+-- Insert Articles for Sport Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Top Sports Events in 2025',
+  'The year 2025 is set to feature some of the most exciting sports events worldwide. From the Summer Olympics in Paris to the Rugby World Cup in France, sports enthusiasts can look forward to thrilling competitions across various disciplines. This article highlights the top sports events to watch in 2025, including major tournaments, world championships, and regional events. Whether you are a fan of football, basketball, tennis, or athletics, these events promise to deliver unforgettable moments.',
+  'John Doe',
+  5,
+  'sport1.jpg',
+  TO_DATE('2025-01-14', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Fitness Tips for Athletes',
+  'Athletes require specific fitness routines to perform at their best. This article provides essential fitness tips for athletes aiming to improve their strength, endurance, and agility. From nutrition to recovery strategies, we explore what it takes to stay in top physical condition. Learn about workout plans, injury prevention, and the importance of mental preparation. Whether you are a professional or an aspiring athlete, these tips will help you enhance your performance and achieve your goals.',
+  'Jane Smith',
+  5,
+  'sport2.jpeg',
+  TO_DATE('2025-02-05', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Popular Sports You Should Try',
+  'In 2025, it’s time to step out of your comfort zone and try a new sport. Whether you’re looking for a fun way to stay active or want to challenge yourself with something different, there are plenty of sports to explore. From ultimate frisbee to rock climbing and paddleboarding, discover sports that are gaining popularity and offering a new experience for enthusiasts. This article highlights exciting sports that you should try this year, no matter your skill level.',
+  'Mark Johnson',
+  5,
+  'sport3.jpg',
+  TO_DATE('2025-03-25', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Best Sports Gear in 2025',
+  'To perform your best in sports, you need the right gear. In 2025, sports gear has evolved with technology, design, and comfort. This article reviews the must-have sports gear for this year, from high-performance running shoes to smart fitness trackers and durable gym wear. Learn about the latest innovations in sports equipment and how they can enhance your training and performance. Whether you’re a professional athlete or a casual gym-goer, having the best gear can make a significant difference.',
+  'Emily Brown',
+  5,
+  'sport4.jpg',
+  TO_DATE('2025-04-12', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Top Athletes to Watch',
+  '2025 will feature a new generation of athletes rising to the top in their respective sports. From seasoned professionals to rising stars, these athletes are set to dominate the headlines this year. This article highlights the top athletes to watch, including those in track and field, tennis, football, and beyond. Learn about their impressive careers, upcoming competitions, and what makes them stand out in their field. Stay ahead of the game by following these athletes on their journey to greatness.',
+  'Sophia Lee',
+  5,
+  'sport5.jpg',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+-- Insert Articles for Lifestyle Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Minimalist Lifestyle Tips',
+  'In 2025, the minimalist lifestyle continues to gain popularity as people seek simplicity and decluttered living. This article explores how to embrace a minimalist approach in your daily life. From simplifying your possessions to focusing on meaningful experiences, discover practical tips on how to live with less and achieve more. Learn how adopting minimalism can lead to a more fulfilling and stress-free life.',
+  'John Doe',
+  6,
+  'lifestyle1.jpg',
+  TO_DATE('2025-01-20', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'How to Be More Productive',
+  'Productivity is key to achieving personal and professional goals. In 2025, staying productive requires more than just hard work; it involves smart strategies and time management. This article provides simple tips and techniques to help you boost productivity, including prioritizing tasks, eliminating distractions, and using productivity tools effectively. Whether you are working from home or the office, these tips will help you maximize your potential.',
+  'Jane Smith',
+  6,
+  'lifestyle2.png',
+  TO_DATE('2025-02-10', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Self-Care Tips for 2025',
+  'Self-care is essential for maintaining both physical and mental health in 2025. This article shares top self-care routines and practices that can improve your overall well-being. From mindfulness and meditation to skincare and fitness, we cover a variety of self-care strategies to help you stay balanced and rejuvenated. Incorporate these tips into your daily routine for a healthier, happier life.',
+  'Mark Johnson',
+  6,
+  'lifestyle3.jpg',
+  TO_DATE('2025-03-22', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Travel Tips for 2025',
+  'Traveling in 2025 comes with new challenges and opportunities. From sustainable travel practices to the best destinations to visit this year, this article provides expert travel hacks and tips. Learn how to plan your trips efficiently, stay safe, and make the most out of your travels in 2025. Whether you’re a frequent traveler or planning your first adventure, these tips will help you explore the world with ease.',
+  'Emily Brown',
+  6,
+  'lifestyle4.png',
+  TO_DATE('2025-04-17', 'YYYY-MM-DD')
+);
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'How to Stay Organized',
+  'Staying organized in 2025 requires a mix of old-school techniques and modern tools. This article explores tips for decluttering your home, workspace, and digital life. Learn how to create effective organization systems, utilize productivity apps, and make minimalism a habit in your daily routine. These strategies will help you stay focused, reduce stress, and lead a more organized life.',
+  'Sophia Lee',
+  6,
+  'lifestyle5.jpg',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+
+-- Insert Articles for Travel Section
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Top Travel Destinations for 2025',
+  'Explore the top travel destinations to visit in 2025, from cultural hotspots to hidden gems around the world. This article highlights must-see places across the globe and provides tips on how to plan your visit, including the best times to travel, unique attractions, and local experiences.',
+  'John Doe',
+  7,
+  'travel1.jpg',
+  TO_DATE('2025-01-25', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Budget Travel Tips for 2025',
+  'Traveling on a budget doesn’t mean sacrificing experiences. This article offers practical tips for saving money while traveling, including recommendations for affordable accommodations, transportation options, and how to enjoy the local culture without breaking the bank.',
+  'Jane Smith',
+  7,
+  'travel2.jpg',
+  TO_DATE('2025-02-15', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Must-Visit Beaches in 2025',
+  'Discover the world’s most beautiful beaches to visit in 2025. From serene islands to bustling coastal cities, this article highlights the top beaches for relaxation, water sports, and scenic views. Whether you’re looking for a quiet retreat or a vibrant beach party scene, there’s something for every traveler.',
+  'Mark Johnson',
+  7,
+  'travel3.jpg',
+  TO_DATE('2025-03-10', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'How to Pack Light for 2025 Trips',
+  'Packing light is a game-changer for stress-free travel. In this article, we share tips and tricks for packing efficiently while ensuring you have everything you need. From choosing versatile clothing to maximizing luggage space, these strategies will make your packing process easier and faster.',
+  'Emily Brown',
+  7,
+  'travel4.jpg',
+  TO_DATE('2025-04-05', 'YYYY-MM-DD')
+);
+
+INSERT INTO Articles (Title, Content, Publisher_Name, Section_Id, Photo, Published_Time)
+VALUES (
+  'Traveling Alone: A Guide for 2025',
+  'Solo travel is more popular than ever, and this guide provides everything you need to know for a safe and enjoyable solo trip in 2025. Learn how to plan, stay safe, and embrace the adventure of traveling alone. From choosing the best destinations for solo travelers to tips on meeting new people, this article covers all the essentials.',
+  'Sophia Lee',
+  7,
+  'travel5.jpg',
+  TO_DATE('2025-05-01', 'YYYY-MM-DD')
+);
+-- Insert Favorites
+INSERT INTO Favorites (user_id, article_id) VALUES (179207, 1);
+INSERT INTO Favorites (user_id, article_id) VALUES (179208, 2);
+INSERT INTO Favorites (user_id, article_id) VALUES (179209, 3);
+INSERT INTO Favorites (user_id, article_id) VALUES (179210, 6);
+INSERT INTO Favorites (user_id, article_id) VALUES (179211, 10);
+
+
+---- Insert Followed_Sections
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (179207, 1);
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (179208, 2);
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (179209, 3);
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (179210, 1);
+INSERT INTO Followed_Sections (user_id, section_id) VALUES (179211, 4);
+
+-- Reactions
+INSERT INTO Reactions (user_id, article_id) VALUES (179207, 2);
+INSERT INTO Reactions (user_id, article_id) VALUES (179208, 3);
+INSERT INTO Reactions (user_id, article_id) VALUES (179209, 4);
+INSERT INTO Reactions (user_id, article_id) VALUES (179210, 5);
+INSERT INTO Reactions (user_id, article_id) VALUES (179211, 6);
+INSERT INTO Reactions (user_id, article_id) VALUES (179212, 7);
+INSERT INTO Reactions (user_id, article_id) VALUES (179213, 7);
+INSERT INTO Reactions (user_id, article_id) VALUES (179208, 8);
+INSERT INTO Reactions (user_id, article_id) VALUES (179207, 8);
+INSERT INTO Reactions (user_id, article_id) VALUES (179209, 8);
+
+-- Comments
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (1, 179207, TO_DATE('2025-05-01 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'Great article on fashion trends!');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (2, 179208, TO_DATE('2025-05-01 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Loved the accessories tips.');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (3, 179209, TO_DATE('2025-05-01 11:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'I support sustainable fashion!');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (4, 179210, TO_DATE('2025-05-01 12:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Excited for upcoming fashion shows.');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (5, 179211, TO_DATE('2025-05-01 13:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'Street style is the real trend.');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (6, 179212, TO_DATE('2025-05-01 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Healthy eating is so important.');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (7, 179213, TO_DATE('2025-05-01 14:45:00', 'YYYY-MM-DD HH24:MI:SS'), 'Loved these vegan recipes!');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (8, 179214, TO_DATE('2025-05-01 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'Quick breakfast tips were helpful.');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (9, 179215, TO_DATE('2025-05-01 16:15:00', 'YYYY-MM-DD HH24:MI:SS'), 'International cuisines are awesome!');
+
+INSERT INTO Comments (Article_id, User_id, Comment_Time, Commenttext)
+VALUES (10, 179216, TO_DATE('2025-05-01 17:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Dessert ideas made my day.');
+
+--Notifications
+-- User 179207 follows Fashion (Article 1)
+INSERT INTO Notifications (UserId, ArticleId, Notification_content, NotificationTime)
+VALUES (179207, 1, 'New article published in the Fashion section you follow!', TO_DATE('2025-05-01 10:20:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- User 179208 follows Food (Article 2)
+INSERT INTO Notifications (UserId, ArticleId, Notification_content, NotificationTime)
+VALUES (179208, 2, 'New article published in the Food section you follow!', TO_DATE('2025-05-01 11:05:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- User 179209 follows Skincare (Article 3)
+INSERT INTO Notifications (UserId, ArticleId, Notification_content, NotificationTime)
+VALUES (179209, 3, 'New article published in the Skincare section you follow!', TO_DATE('2025-05-01 11:50:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- User 179210 follows Health (Article 4)
+INSERT INTO Notifications ( UserId, ArticleId, Notification_content, NotificationTime)
+VALUES (179210, 4, 'New article published in the Health section you follow!', TO_DATE('2025-05-01 12:35:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- User 179211 follows Sport (Article 5)
+INSERT INTO Notifications ( UserId, ArticleId, Notification_content, NotificationTime)
+VALUES (179211, 5, 'New article published in the Sport section you follow!', TO_DATE('2025-05-01 13:20:00', 'YYYY-MM-DD HH24:MI:SS'));
+
+-- Proceduers
+-- SearchArticles
+CREATE OR REPLACE PROCEDURE SearchArticles (
+    search_value IN VARCHAR2,
+    out_cursor OUT SYS_REFCURSOR
+) AS
+    search_date DATE;
+BEGIN
+    BEGIN
+        search_date := TO_DATE(search_value, 'YYYY-MM-DD');
+        
+        OPEN out_cursor FOR
+            SELECT 
+                A.Id,
+                A.Title,
+                A.Photo AS ImagePath,
+                A.Published_Time AS PublishDate,
+                (SELECT COUNT(*) FROM Comments C WHERE C.Article_id = A.Id) AS CommentCount,
+                (SELECT COUNT(*) FROM Reactions R WHERE R.article_id = A.Id) AS Likes
+            FROM Articles A
+            WHERE TRUNC(A.Published_Time) = search_date
+            ORDER BY A.Published_Time DESC;
+    
+    EXCEPTION
+        WHEN OTHERS THEN
+            OPEN out_cursor FOR
+                SELECT 
+                    A.Id,
+                    A.Title,
+                    A.Photo AS ImagePath,
+                    A.Published_Time AS PublishDate,
+                    (SELECT COUNT(*) FROM Comments C WHERE C.Article_id = A.Id) AS CommentCount,
+                    (SELECT COUNT(*) FROM Reactions R WHERE R.article_id = A.Id) AS Likes
+
+                FROM Articles A
+                WHERE LOWER(A.Title) LIKE '%' || LOWER(search_value) || '%'
+                   OR LOWER(A.Publisher_Name) LIKE '%' || LOWER(search_value) || '%'
+                ORDER BY A.Published_Time DESC;
+    END;
+END;
+/
+
+-- GetLatestArticles
+CREATE OR REPLACE PROCEDURE GetLatestArticles (
+    result_cursor OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN result_cursor FOR
+        SELECT 
+            A.Id,
+            A.Title,
+            A.Photo AS ImagePath,
+            A.Published_Time AS PublishDate,
+            (SELECT COUNT(*) FROM Comments C WHERE C.Article_id = A.Id) AS CommentCount,
+            (SELECT COUNT(*) FROM Reactions R WHERE R.article_id = A.Id) AS Likes
+        FROM Articles A
+        ORDER BY A.Published_Time DESC;
+END;
+/
+-- Get_Section_Id 
+CREATE OR REPLACE PROCEDURE Get_Section_Id (
+    section_name IN VARCHAR2,
+    section_id OUT NUMBER
+)
+AS
+BEGIN
+    SELECT id INTO section_id
+    FROM Sections
+    WHERE name = section_name;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        section_id := -1;
+    WHEN OTHERS THEN
+        section_id := -2; -- Other Exception
+END;
+/
+---- Add_To_Favorites
+--CREATE OR REPLACE PROCEDURE Add_To_Favorites(
+--    a_title IN VARCHAR2,
+--    a_photo OUT varchar2,
+--	a_Publisher_Name OUT VARCHAR2
+--)
+--AS
+--BEGIN
+--        SELECT Title, Photo, Publisher_Name into a_title, a_photo, a_Publisher_Name
+--        FROM Articles 
+--        WHERE Title=a_title;
+--END;
+CREATE OR REPLACE PROCEDURE Add_To_Favorites(
+    a_title IN VARCHAR2,
+    a_photo OUT VARCHAR2,
+    a_Publisher_Name OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT Photo, Publisher_Name
+    INTO a_photo, a_Publisher_Name
+    FROM Articles
+    WHERE Title = a_title;
+END;
+/
+
+-- GetFav
+create or replace PROCEDURE GetFav(uderId in NUMBER ,articleinfo OUT sys_refcursor)
+as
+BEGIN
+open articleinfo for
+select articles.title, articles.publisher_name, articles.photo
+from Favorites,Articles
+where Favorites.USER_ID =uderId and Articles.ID = Favorites.ARTICLE_ID;
+END;
+/
+
+-- GetNoti
+CREATE OR REPLACE PROCEDURE GetNoti (
+    uderId IN NUMBER,
+    NotificationInfo OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+OPEN NotificationInfo FOR
+SELECT n.Notification_Content,a.Title,s.Name AS SectionName,n.NotificationTime,
+n.IsRead,n.NOTIFICATIONID,n.ARTICLEID
+FROM Notifications n JOIN Articles a ON a.Id = n.ArticleId JOIN Sections s ON a.Section_Id = s.Id
+WHERE n.UserId = uderId
+        ORDER BY 
+            n.NotificationTime DESC;    
+END;
+/
+
