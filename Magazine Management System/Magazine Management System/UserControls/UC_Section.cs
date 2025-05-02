@@ -23,10 +23,10 @@ namespace Magazine_Management_System.UserControls
         int followers = 0;
         int articles = 0;
 
-        public UC_Section(int sectionID,int userID)
+        public UC_Section(string setionName, int userID)
         {
             InitializeComponent();
-            this.sectionId = sectionID;
+            this.setionName = setionName;
             this.userID = userID;
         }
         public void viewArticles()
